@@ -10,7 +10,7 @@ Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
 Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
 Source3:	%{name}-x11.desktop
 Source4:	%{name}-sdl.desktop
-Icon:		%{name}.xpm
+Icon:		doomlegacy.xpm
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch

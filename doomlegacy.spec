@@ -5,17 +5,17 @@ Version:	1.4
 Release:	2
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
-Source0:	http://prdownloads.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
-Source1:	http://prdownloads.sourceforge.net/doomlegacy/doom3_wad_132.zip
-Source2:	http://prdownloads.sourceforge.net/doomlegacy/legacy_dat.zip
+Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
+Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
+Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
 Patch2:		%{name}-nosndstat.patch
 Patch3:		%{name}-sound.patch
-BuildRequires:	XFree86-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
+BuildRequires:	XFree86-devel
 BuildRequires:	nasm
 BuildRequires:	unzip
 ExclusiveArch:	%{ix86}

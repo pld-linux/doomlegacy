@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SDLdoom
+Comment=Doom - sdl version
+Comment[pl]=Doom - wersja sdl
+Exec=lsdldoom
+Icon=
+Terminal=0
+Type=Application
+# vi: encoding=utf-8

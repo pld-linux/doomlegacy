@@ -1,7 +1,7 @@
 Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
-Version:	1.4
+Version:	1.40
 Release:	2
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games

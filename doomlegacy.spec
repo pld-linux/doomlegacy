@@ -2,7 +2,7 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.40
-Release:	4
+Release:	5
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
@@ -18,6 +18,7 @@ Patch1:		%{name}-Makefile.patch
 Patch2:		%{name}-nosndstat.patch
 Patch3:		%{name}-sound.patch
 Patch5:		%{name}-nocmap.patch
+Patch6:		%{name}-vidmodes.patch
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	XFree86-devel
@@ -80,6 +81,7 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 %patch2 -p0
 %patch3 -p0
 %patch5 -p1
+%patch6 -p1
 
 %build
 mkdir bin

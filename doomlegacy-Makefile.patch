@@ -1,0 +1,94 @@
+--- doomlegacy_src/linux_x/musserv/Makefile.linux.orig	Sat Feb 22 21:12:31 2003
++++ doomlegacy_src/linux_x/musserv/Makefile.linux	Sat Feb 22 21:12:52 2003
+@@ -3,7 +3,7 @@
+ #
+ 
+ CC	= gcc
+-CFLAGS	= -I. -Wall -O2 -m486
++CFLAGS = -I. -Wall $(OPTFLAGS)
+ LDFLAGS	=
+ #LDFLAGS	= -static
+ 
+--- doomlegacy_src/linux_x/sndserv/Makefile.orig	Sat Feb 22 21:11:50 2003
++++ doomlegacy_src/linux_x/sndserv/Makefile	Sat Feb 22 21:12:12 2003
+@@ -22,7 +22,7 @@
+ #
+ 
+ CC=gcc
+-CFLAGS=-O2 -m486 -Wall -DNORMALUNIX -DLINUX
++CFLAGS=$(OPTFLAGS) -Wall -DNORMALUNIX -DLINUX
+ ifdef FREEBSD
+ CFLAGS:=${CFLAGS} -DFREEBSD
+ endif
+--- doomlegacy_src/tools/makefile.orig	Sat Feb 22 21:13:11 2003
++++ doomlegacy_src/tools/makefile	Sat Feb 22 21:14:30 2003
+@@ -1,24 +1,24 @@
+ 
+ default:    dircomp2.c
+-	gcc -O6 -mpentium -Wall -s dircomp2.c -o dircomp2.exe
++	gcc $(OPTFLAGS) -Wall -s dircomp2.c -o dircomp2.exe
+ 
+ asm:
+-	gcc -O6 -mpentium -Wall -g dircomp2.c -o tmp.exe
++	gcc $(OPTFLAGS) -Wall -g dircomp2.c -o tmp.exe
+ 	objdump  -dS tmp.exe --debugging --no-show-raw-insn > dircomp2.s
+ 	del tmp.exe
+ 
+ h2d:	 h2d.c
+-	gcc -O6 -mpentium -Wall -s h2d.c -o h2d.exe
++	gcc $(OPTFLAGS) -Wall -s h2d.c -o h2d.exe
+ 
+ dckconv:     dckconv.c
+-	gcc -O6 -mpentium -Wall -s dckconv.c -o dckconv.exe
++	gcc $(OPTFLAGS) -Wall -s dckconv.c -o dckconv.exe
+ 
+ dckconv2:     dckconv2.c
+-	gcc -O6 -mpentium -Wall -s dckconv2.c -o dckconv2.exe
++	gcc $(OPTFLAGS) -Wall -s dckconv2.c -o dckconv2.exe
+ 
+ dckcomp:     dckcomp.c
+-	gcc -O6 -mpentium -Wall -s dckcomp.c -o dckcomp.exe
++	gcc $(OPTFLAGS) -Wall -s dckcomp.c -o dckcomp.exe
+ 
+ convert:    convert.c
+-	gcc -O6 -mpentium -Wall -s convert.c -o convert.exe
++	gcc $(OPTFLAGS) -Wall -s convert.c -o convert.exe
+ 	
+--- doomlegacy_src/makefile.orig	Sat Feb 22 21:07:58 2003
++++ doomlegacy_src/makefile	Sat Feb 22 21:11:27 2003
+@@ -471,7 +471,7 @@
+ 
+ 	# build with profiling information
+ 	ifdef PGCC
+-		CFLAGS = -g -pg -DPARANOIA -fwritable-strings $(OPTS)
++		CFLAGS = $(OPTS) $(OPTFLAGS) -ffast-math -fomit-frame-pointer -fwritable-strings
+ 	else
+ 		CFLAGS = -g -pg -m486 -O3 -ffast-math -fwritable-strings $(OPTS)
+ 	endif
+@@ -644,7 +644,7 @@
+ 
+ #dll
+ dll : $(O)/r_opengl.o $(O)/ogl_x11.o
+-	$(CC) -mpentium -O6 -o $(BIN)/r_opengl.so -shared -nostartfiles $(O)/r_opengl.o $(O)/ogl_x11.o -L/usr/X11R6/lib -L/usr/local/lib -lX11 -lXext -lGL -lGLU -lm
++	$(CC) $(OPTFLAGS) -o $(BIN)/r_opengl.so -shared -nostartfiles $(O)/r_opengl.o $(O)/ogl_x11.o -L/usr/X11R6/lib -L/usr/local/lib -lGL -lX11 -lXext -lGLU -lm
+ 
+ musserv:
+ 	@mkdir -p $(MUSSERV)/linux
+@@ -658,7 +658,7 @@
+ 
+ ifdef LINUX
+ $(O)/r_opengl.o:	hardware/r_opengl/r_opengl.c hardware/r_opengl/r_opengl.h
+-	$(CC) -mpentium -O6 -o $(O)/r_opengl.o	-DHWRENDER -DVID_X11 -DLINUX $(POLL_POINTER) -shared -nostartfiles -I/usr/X11R6/include -c hardware/r_opengl/r_opengl.c
++	$(CC) $(OPTFLAGS) -o $(O)/r_opengl.o    -DHWRENDER -DVID_X11 -DLINUX -DPOLL_POINTER -shared -nostartfiles -I/usr/X11R6/include -c hardware/r_opengl/r_opengl.c
+ endif
+ 
+ ifdef SDL
+@@ -681,7 +681,7 @@
+ 	$(CC) -mpentium -O6 -o $(O)/ogl_x11.o -DHWRENDER -DVID_X11 -DLINUX $(POLL_POINTER) -shared -nostartfiles -I/usr/X11R6/include -c hardware/r_opengl/ogl_x11.c
+ else
+ $(O)/ogl_x11.o:  hardware/r_opengl/ogl_x11.c hardware/r_opengl/r_opengl.h
+-	$(CC) -mpentium -O6 -o $(O)/ogl_x11.o -DHWRENDER -DVID_X11 -DLINUX -DFREEBSD $(POLL_POINTER) -shared -nostartfiles -I/usr/X11R6/include -c hardware/r_opengl/ogl_x11.c
++	$(CC) $(OPTFLAGS) -o $(O)/ogl_x11.o -DHWRENDER -DVID_X11 -DLINUX -DPOLL_POINTER -shared -nostartfiles -I/usr/X11R6/include -c hardware/r_opengl/ogl_x11.c
+ endif
+ 
+ 

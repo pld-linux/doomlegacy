@@ -24,7 +24,7 @@
 -        else
 -            doomwaddir = ".";
 -    }
-+    doomwaddir = getenv("DOOMWADDIR") ? getenv("DOOMWADDIR") : "/ble/costam";
++    doomwaddir = getenv("DOOMWADDIR") ? getenv("DOOMWADDIR") : "/usr/X11R6/share/games/doom";
          
  #ifdef __MACOS__
          // cwd is always "/" when app is dbl-clicked

@@ -5,21 +5,6 @@ Version:	1.32
 Release:	1.beta1.1
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
-Group(cs):	Aplikace/Hry
-Group(da):	Programmer/Spil
-Group(de):	Applikationen/Spiele
-Group(es):	Aplicaciones/Juegos
-Group(fr):	Applications/Jeux
-Group(is):	Forrit/Leikir
-Group(it):	Applicazioni/Giochi
-Group(ja):	╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	Applikasjoner/Spill
-Group(pl):	Aplikacje/Gry
-Group(pt):	AplicaГУes/Jogos
-Group(ru):	Приложения/Игры
-Group(sl):	Programi/Igre
-Group(sv):	TillДmpningar/Spel
-Group(uk):	Прикладн╕ Програми/╤гри
 Source0:	http://prdownloads.sourceforge.net/doomlegacy/legacy_132beta1_src.tar.gz
 Source1:	http://prdownloads.sourceforge.net/doomlegacy/doom3_wad_132.zip
 Patch0:		%{name}-paths.patch
@@ -47,21 +32,6 @@ DOOM Legacy dla Linuksa.
 Summary:	DOOM Legacy for Linux - common files
 Summary(pl):	DOOM Legacy dla Linuksa - pliki wspСlne
 Group:		X11/Applications/Games
-Group(cs):	X11/Aplikace/Hry
-Group(da):	X11/Programmer/Spil
-Group(de):	X11/Applikationen/Spiele
-Group(es):	X11/Aplicaciones/Juegos
-Group(fr):	X11/Applications/Jeux
-Group(is):	X11/Forrit/Leikir
-Group(it):	X11/Applicazioni/Giochi
-Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	X11/Applikasjoner/Spill
-Group(pl):	X11/Aplikacje/Gry
-Group(pt):	X11/AplicaГУes/Jogos
-Group(ru):	X11/Приложения/Игры
-Group(sl):	X11/Programi/Igre
-Group(sv):	X11/TillДmpningar/Spel
-Group(uk):	X11/Прикладн╕ Програми/╤гри
 
 %description common
 Common files for both versions of DOOM Legacy.
@@ -73,21 +43,6 @@ Pliki wspСlne dla obu wersji DOOM Legacy.
 Summary:	DOOM Legacy for Linux - X Window and OpenGL version
 Summary(pl):	DOOM Legacy dla Linuksa - wersja korzystaj╠ca z X Window i OpenGL
 Group:		X11/Applications/Games
-Group(cs):	X11/Aplikace/Hry
-Group(da):	X11/Programmer/Spil
-Group(de):	X11/Applikationen/Spiele
-Group(es):	X11/Aplicaciones/Juegos
-Group(fr):	X11/Applications/Jeux
-Group(is):	X11/Forrit/Leikir
-Group(it):	X11/Applicazioni/Giochi
-Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	X11/Applikasjoner/Spill
-Group(pl):	X11/Aplikacje/Gry
-Group(pt):	X11/AplicaГУes/Jogos
-Group(ru):	X11/Приложения/Игры
-Group(sl):	X11/Programi/Igre
-Group(sv):	X11/TillДmpningar/Spel
-Group(uk):	X11/Прикладн╕ Програми/╤гри
 Requires:	OpenGL
 
 %description x11
@@ -101,21 +56,6 @@ OpenGL.
 Summary:	DOOM Legacy for Linux - SDL version
 Summary(pl):	DOOM Legacy dla Linuksa - wersja korzystaj╠ca z SDL
 Group:		X11/Applications/Games
-Group(cs):	X11/Aplikace/Hry
-Group(da):	X11/Programmer/Spil
-Group(de):	X11/Applikationen/Spiele
-Group(es):	X11/Aplicaciones/Juegos
-Group(fr):	X11/Applications/Jeux
-Group(is):	X11/Forrit/Leikir
-Group(it):	X11/Applicazioni/Giochi
-Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╡║╪╔Ю
-Group(no):	X11/Applikasjoner/Spill
-Group(pl):	X11/Aplikacje/Gry
-Group(pt):	X11/AplicaГУes/Jogos
-Group(ru):	X11/Приложения/Игры
-Group(sl):	X11/Programi/Igre
-Group(sv):	X11/TillДmpningar/Spel
-Group(uk):	X11/Прикладн╕ Програми/╤гри
 Requires:	OpenGL
 
 %description sdl

@@ -2,14 +2,16 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.40
-Release:	3
+Release:	4
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
 Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
 Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
-Source3:        %{name}-x11.desktop
-Source4:        %{name}-sdl.desktop
+Source3:	%{name}-x11.desktop
+Source4:	%{name}-sdl.desktop
+Source5:	%{name}.png
+Icon:		doomlegacy.xpm
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
@@ -43,16 +45,17 @@ Common files for both versions of DOOM Legacy.
 %description common -l pl
 Pliki wspólne dla obu wersji DOOM Legacy.
 
-%package x11
+%package X11
 Summary:	DOOM Legacy for Linux - X Window and OpenGL version
 Summary(pl):	DOOM Legacy dla Linuksa - wersja korzystaj±ca z X Window i OpenGL
 Group:		X11/Applications/Games
 Requires:	OpenGL
+Obsoletes:	%{name}-x11
 
-%description x11
+%description X11
 This is DOOM Legacy for Linux - X11 and OpenGL version.
 
-%description x11 -l pl
+%description X11 -l pl
 To jest DOOM Legacy dla Linuksa - wersja korzystaj±ca z X Window i
 OpenGL.
 
@@ -89,7 +92,8 @@ mkdir bin
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy,%{_applnkdir}/Games}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy} \
+	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/Arcade}
 
 install bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
@@ -100,12 +104,17 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games
-install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games
-
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
+install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
+install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
+
+%post common
+echo "To run legacy doom You need either Doom.wad, Doom1.wad, Doom2.wad,"
+echo "Tnt.wad, Plutonia.wad, Heretic.wad or Heretic1.wad"
+echo "from any sharware or commercial version of Doom or Heretic!"
 
 %files common
 %defattr(644,root,root,755)
@@ -113,14 +122,15 @@ rm -rf ${RPM_BUILD_ROOT}
 %dir %{_libdir}/doomlegacy
 %attr(755,root,root) %{_libdir}/doomlegacy/*serv*
 %{_datadir}/doomlegacy
+%{_pixmapsdir}/*
 
-%files x11
+%files X11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so
-%{_applnkdir}/Games/*x11.desktop
+%{_applnkdir}/Games/Arcade/*x11.desktop
 
 %files sdl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lsdldoom
-%{_applnkdir}/Games/*sdl.desktop
+%{_applnkdir}/Games/Arcade/*sdl.desktop

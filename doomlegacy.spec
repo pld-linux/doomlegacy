@@ -18,7 +18,6 @@ BuildRequires:	unzip
 ExclusiveArch:	%{ix86}
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
 %define		debugcflags	-O1 -g
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
 

@@ -80,7 +80,7 @@ This is DOOM Legacy for Linux - SDL version.
 To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
-%setup -q -c -a 2 -a 3 
+%setup -q -c -a 2 -a 3
 %patch0 -p0
 %patch1 -p0
 %patch2 -p0

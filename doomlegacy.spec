@@ -10,6 +10,7 @@ Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
 Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
 Source3:	%{name}-x11.desktop
 Source4:	%{name}-sdl.desktop
+Icon:		%{name}.xpm
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
@@ -90,7 +91,7 @@ mkdir bin
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy,%{_applnkdir}/Games/RPG}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy,%{_applnkdir}/Games/Arcade}
 
 install bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
@@ -101,8 +102,8 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/RPG
-install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/RPG
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
+install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
@@ -123,9 +124,9 @@ echo "from any sharware or commercial version of Doom or Heretic!"
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so
-%{_applnkdir}/Games/RPG/*x11.desktop
+%{_applnkdir}/Games/Arcade/*x11.desktop
 
 %files sdl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lsdldoom
-%{_applnkdir}/Games/RPG/*sdl.desktop
+%{_applnkdir}/Games/Arcade/*sdl.desktop

@@ -27,6 +27,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	nasm
+BuildRequires:	unzip
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

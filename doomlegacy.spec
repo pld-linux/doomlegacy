@@ -16,6 +16,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	nasm
 BuildRequires:	unzip
+ExclusiveArch:	%{ix86}
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6

@@ -2,7 +2,7 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.40
-Release:	3
+Release:	2
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
@@ -21,6 +21,7 @@ BuildRequires:	unzip
 ExclusiveArch:	%{ix86}
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		debugcflags	-O1 -g
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
@@ -78,11 +79,11 @@ mkdir bin
 # linux_x contains some precompiled binary objects (incompatible with glibc 2.3) - kill them
 %{__make} -C doomlegacy_src clean LINUX=1
 %{__make} -C doomlegacy_src \
-	PGCC=1 LINUX=1 OPTFLAGS="%{rpmcflags}"
+	PGCC=1 LINUX=1 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 
 %{__make} -C doomlegacy_src clean LINUX=1
 %{__make} -C doomlegacy_src \
-	PGCC=1 LINUX=1 SDL=1 OPTFLAGS="%{rpmcflags}"
+	PGCC=1 LINUX=1 SDL=1 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 
 %install
 rm -rf $RPM_BUILD_ROOT

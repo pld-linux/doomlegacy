@@ -1,0 +1,36 @@
+--- doomlegacy-1.40/doomlegacy_src/linux_x/i_sound.c.orig	Fri Mar  7 22:14:51 2003
++++ doomlegacy-1.40/doomlegacy_src/linux_x/i_sound.c	Fri Mar  7 22:18:30 2003
+@@ -88,6 +88,7 @@
+ #include <sys/filio.h>
+ #endif
+ 
++#include <errno.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <sys/ioctl.h>
+@@ -261,7 +262,6 @@
+   int*  arg )
+ {   
+     int         rc;
+-    extern int  errno;
+     
+     rc = ioctl(fd, command, arg);  
+     if (rc < 0)
+--- doomlegacy-1.40/doomlegacy_src/linux_x/sndserv/linux.c.orig	Sun Sep 22 00:35:57 2002
++++ doomlegacy-1.40/doomlegacy_src/linux_x/sndserv/linux.c	Fri Mar  7 22:22:26 2003
+@@ -39,6 +39,7 @@
+ 
+ #include <stdlib.h>
+ #include <stdio.h>
++#include <errno.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <sys/ioctl.h>
+@@ -67,7 +68,6 @@
+   int*  arg )
+ {   
+     int         rc;
+-    extern int  errno;
+     
+     rc = ioctl(fd, command, arg);  
+     if (rc < 0)

@@ -7,5 +7,5 @@ Exec=llxdoom
 Icon=doomlegacy.png
 Terminal=false
 Type=Application
-Categories=Application;Game;ActionGame;
+Categories=Game;ActionGame;
 # vi: encoding=utf-8

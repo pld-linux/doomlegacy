@@ -2,15 +2,16 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.40
-Release:	4
+Release:	5
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
-Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
-Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
-Source3:	%{name}-x11.desktop
-Source4:	%{name}-sdl.desktop
-Source5:	%{name}.png
+Source1:	http://freedoom.sourceforge.net/deutex/wads/doom2.wad.gz
+Source2:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
+Source3:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
+Source4:	%{name}-x11.desktop
+Source5:	%{name}-sdl.desktop
+Source6:	%{name}.png
 Icon:		doomlegacy.xpm
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
@@ -75,7 +76,7 @@ This is DOOM Legacy for Linux - SDL version.
 To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
-%setup -q -c -a 1 -a 2
+%setup -q -c -a 2 -a 3 
 %patch0 -p0
 %patch1 -p0
 %patch2 -p0
@@ -107,20 +108,18 @@ install doomlegacy_src/linux_x/sndserv/linux/llsndserv $RPM_BUILD_ROOT%{_libdir}
 install doomlegacy_src/linux_x/musserv/linux/musserver $RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 
+
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
+install %{SOURCE1}	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
+gzip -d $RPM_BUILD_ROOT%{_datadir}/doomlegacy/doom2.wad.gz
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
 install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
-install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE5} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
+install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
-
-%post common
-echo "To run legacy doom You need either Doom.wad, Doom1.wad, Doom2.wad,"
-echo "Tnt.wad, Plutonia.wad, Heretic.wad or Heretic1.wad"
-echo "from any sharware or commercial version of Doom or Heretic!"
 
 %files common
 %defattr(644,root,root,755)

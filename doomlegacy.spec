@@ -7,12 +7,10 @@ License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
 # Source0-md5:	caad0e3ee637a00520b641c9953f079e
-Source1:	http://dl.sourceforge.net/freedoom/doom2.wad.gz
-# Source1-md5:	32610843ccad90028257595c3ca1a8a5
-Source2:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
-# Source2-md5:	3d737bb577bc4295af68d54988191344
-Source3:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
-# Source3-md5:	8182e1aebac3696ddc7f9e0663740d9a
+Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
+# Source1-md5:	3d737bb577bc4295af68d54988191344
+Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
+# Source2-md5:	8182e1aebac3696ddc7f9e0663740d9a
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png
@@ -80,7 +78,7 @@ This is DOOM Legacy for Linux - SDL version.
 To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
-%setup -q -c -a 2 -a 3
+%setup -q -c -a1 -a2
 %patch0 -p0
 %patch1 -p0
 %patch2 -p0
@@ -115,8 +113,6 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
-install %{SOURCE1}	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
-gzip -d $RPM_BUILD_ROOT%{_datadir}/doomlegacy/doom2.wad.gz
 
 install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
 install %{SOURCE5} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
@@ -124,6 +120,14 @@ install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
+
+%post common
+if [ "$1" = "1" ]; then
+	echo "To run doomlegacy you need some WAD file: either freedoom package"
+	echo "or some shareware or commercial WAD from Doom or Heretic:"
+	echo "Doom.wad, Doom1.wad, Doom2.wad, Tnt.wad, Plutonia.wad,"
+	echo "Heretic.wad or Heretic1.wad ."
+fi
 
 %files common
 %defattr(644,root,root,755)

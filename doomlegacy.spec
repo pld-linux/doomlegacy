@@ -46,16 +46,17 @@ Common files for both versions of DOOM Legacy.
 %description common -l pl
 Pliki wspólne dla obu wersji DOOM Legacy.
 
-%package x11
+%package X11
 Summary:	DOOM Legacy for Linux - X Window and OpenGL version
 Summary(pl):	DOOM Legacy dla Linuksa - wersja korzystaj±ca z X Window i OpenGL
 Group:		X11/Applications/Games
 Requires:	OpenGL
+Obsoletes:	%{name}-x11
 
-%description x11
+%description X11
 This is DOOM Legacy for Linux - X11 and OpenGL version.
 
-%description x11 -l pl
+%description X11 -l pl
 To jest DOOM Legacy dla Linuksa - wersja korzystaj±ca z X Window i
 OpenGL.
 
@@ -124,7 +125,7 @@ echo "from any sharware or commercial version of Doom or Heretic!"
 %{_datadir}/doomlegacy
 %{_pixmapsdir}/*
 
-%files x11
+%files X11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so

@@ -4,6 +4,6 @@ Comment=Doom - X11 version
 Comment[pl]=Doom - wersja X11
 Exec=llxdoom
 Icon=doomlegacy.png
-Terminal=0
+Terminal=false
 Type=Application
 # vi: encoding=utf-8

@@ -4,6 +4,6 @@ Comment=Doom - SDL version
 Comment[pl]=Doom - wersja SDL
 Exec=lsdldoom
 Icon=doomlegacy.png
-Terminal=0
+Terminal=false
 Type=Application
 # vi: encoding=utf-8

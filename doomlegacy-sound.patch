@@ -5,7 +5,7 @@
      return;
  
 -  fn_snd = searchpath(sndserver_cmd.string);
-+  fn_snd = "/usr/lib/doomlegacy/llsndserv";
++  fn_snd = "/usr/X11R6/lib/doomlegacy/llsndserv";
    
    // start sound process
    if ( !access(fn_snd, X_OK) )
@@ -14,7 +14,7 @@
  
  #ifdef MUSSERV
 -  fn_mus = searchpath(musserver_cmd.string);
-+  fn_mus = "/usr/lib/doomlegacy/musserver";
++  fn_mus = "/usr/X11R6/lib/doomlegacy/musserver";
  
    // now try to start the music server process
    if (!access(fn_mus, X_OK)) {

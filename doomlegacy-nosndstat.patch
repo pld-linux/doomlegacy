@@ -1,5 +1,5 @@
---- doomlegacy_src/linux_x/musserv/sequencer.c.orig	Sat Feb 22 21:25:59 2003
-+++ doomlegacy_src/linux_x/musserv/sequencer.c	Sat Feb 22 21:27:23 2003
+--- doomlegacy_142_src/linux_x/musserv/sequencer.c.orig	Sat Feb 22 21:25:59 2003
++++ doomlegacy_142_src/linux_x/musserv/sequencer.c	Sat Feb 22 21:27:23 2003
 @@ -177,11 +177,7 @@
    seq_dev = num_fm;
  

@@ -1,5 +1,5 @@
---- doomlegacy-1.40/doomlegacy_src/linux_x/i_video_xshm.c.orig	Fri Mar  7 22:22:56 2003
-+++ doomlegacy-1.40/doomlegacy_src/linux_x/i_video_xshm.c	Fri Mar  7 22:51:25 2003
+--- doomlegacy-1.40/doomlegacy_142_src/linux_x/i_video_xshm.c.orig	Fri Mar  7 22:22:56 2003
++++ doomlegacy-1.40/doomlegacy_142_src/linux_x/i_video_xshm.c	Fri Mar  7 22:51:25 2003
 @@ -1619,14 +1619,14 @@
      if(rendermode==render_soft) {
      // setup attributes for main window

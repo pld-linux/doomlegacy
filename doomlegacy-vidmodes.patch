@@ -1,5 +1,5 @@
---- doomlegacy-1.40/doomlegacy_src/linux_x/i_video_xshm.c~	Fri Mar 14 03:11:35 2003
-+++ doomlegacy-1.40/doomlegacy_src/linux_x/i_video_xshm.c	Fri Mar 14 03:11:35 2003
+--- doomlegacy-1.40/doomlegacy_142_src/linux_x/i_video_xshm.c~	Fri Mar 14 03:11:35 2003
++++ doomlegacy-1.40/doomlegacy_142_src/linux_x/i_video_xshm.c	Fri Mar 14 03:11:35 2003
 @@ -182,7 +182,9 @@
  // resolution threshold for hires mode
  #define HIRES_HORIZ (640)

@@ -1,20 +1,20 @@
---- doomlegacy_src/linux_x/i_sound.c.orig	Sun Feb 23 01:03:54 2003
-+++ doomlegacy_src/linux_x/i_sound.c	Sun Feb 23 01:19:30 2003
-@@ -929,7 +929,7 @@
-   if (nosound)
-     return;
+--- doomlegacy_142_src/linux_x/i_sound.c.orig	Sun Feb 23 01:03:54 2003
++++ doomlegacy_142_src/linux_x/i_sound.c	Sun Feb 23 01:19:30 2003
+@@ -880,7 +880,7 @@
+     if (nosound)
+         return;
  
--  fn_snd = searchpath(sndserver_cmd.string);
-+  fn_snd = "/usr/lib/doomlegacy/llsndserv";
-   
-   // start sound process
-   if ( !access(fn_snd, X_OK) )
-@@ -1057,7 +1057,7 @@
-     return;
+-    fn_snd = searchpath(sndserver_cmd.string);
++    fn_snd = "/usr/lib/doomlegacy/llsndserv";
+ 
+     // start sound process
+     if (!access(fn_snd, X_OK))
+@@ -1004,7 +1004,7 @@
+         return;
  
  #ifdef MUSSERV
--  fn_mus = searchpath(musserver_cmd.string);
-+  fn_mus = "/usr/lib/doomlegacy/musserver";
+-    fn_mus = searchpath(musserver_cmd.string);
++    fn_mus = "/usr/lib/doomlegacy/musserver";
  
-   // now try to start the music server process
-   if (!access(fn_mus, X_OK)) {
+     // now try to start the music server process
+     if (!access(fn_mus, X_OK))

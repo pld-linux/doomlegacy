@@ -19,6 +19,7 @@ Patch2:		%{name}-nosndstat.patch
 Patch3:		%{name}-sound.patch
 Patch4:		%{name}-errno.patch
 Patch5:		%{name}-nocmap.patch
+Patch6:		%{name}-vidmodes.patch
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	XFree86-devel
@@ -81,6 +82,7 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 %patch3 -p0
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 mkdir bin

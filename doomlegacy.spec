@@ -2,15 +2,15 @@ Summary:	DOOM Legacy for Linux
 Name:		doomlegacy
 Version:	1.32
 Release:	1.beta1
+License:	GPL, perhaps except for doom3.wad
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
 Source0:	http://prdownloads.sourceforge.net/doomlegacy/legacy_132beta1_src.tar.gz
 Source1:	http://prdownloads.sourceforge.net/doomlegacy/doom3_wad_132.zip
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
 Patch2:		%{name}-nosndstat.patch
-License:	GPL, perhaps except for doom3.wad
-Group:		Applications/Games
-Group(de):	Applikationen/Spiele
-Group(pl):	Aplikacje/Gry
 BuildRequires:	XFree86-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
@@ -23,6 +23,7 @@ Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
+DOOM Legacy for Linux.
 
 %package common
 Summary:	DOOM Legacy for Linux - common files

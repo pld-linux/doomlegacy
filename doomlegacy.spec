@@ -9,7 +9,8 @@ Source0:	http://dl.sourceforge.net/doomlegacy/legacy_142_src.tar.gz
 # Source0-md5:	62f5cdad464463038d568a53b13c22f7
 Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
 # Source1-md5:	3d737bb577bc4295af68d54988191344
-Source2:	legacy.dat.tar.gz
+Source2:	http://ep09.pld-linux.org/~havner/legacy.dat
+# Source2-md5:	df5cac5c3d37849ceb432cbff4df2415
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png
@@ -76,7 +77,7 @@ This is DOOM Legacy for Linux - SDL version.
 To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
-%setup -q -c -a1 -a2
+%setup -q -c -a1
 %patch0 -p0
 %patch1 -p0
 %patch2 -p0
@@ -110,7 +111,7 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 
 
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
-install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
+install %{SOURCE2}	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
 install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}

@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=X11doom
-Comment=Doom - x11 version
-Comment[pl]=Doom - wersja x11
+Comment=Doom - X11 version
+Comment[pl]=Doom - wersja X11
 Exec=llxdoom
-Icon=
+Icon=doomlegacy.png
 Terminal=0
 Type=Application
 # vi: encoding=utf-8

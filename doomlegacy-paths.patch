@@ -1,0 +1,30 @@
+--- doomlegacy/linux_x/i_video_xshm.c.orig	Fri May 11 14:54:59 2001
++++ doomlegacy/linux_x/i_video_xshm.c	Sat Jun 30 10:55:58 2001
+@@ -1896,7 +1896,7 @@
+         
+        rendermode = render_opengl;
+        //dlptr = dlopen("./r_opengl.so",RTLD_LAZY);
+-       dlptr = dlopen("./r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
++       dlptr = dlopen("/usr/X11R6/lib/doom/r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
+        if(!dlptr) {
+           fprintf(stderr,"Error opening r_opengl.so!\n%s\n",dlerror());
+           rendermode = render_soft;
+--- doomlegacy/d_main.c.orig	Fri May 11 14:33:54 2001
++++ doomlegacy/d_main.c	Sat Jun 30 10:54:48 2001
+@@ -979,15 +979,7 @@
+     // change to the directory where 'doom3.wad' is found
+    I_LocateWad();
+ #endif
+-    doomwaddir = getenv("DOOMWADDIR");
+-    if (!doomwaddir)
+-    {
+-        // get the current directory (possible problem on NT with "." as current dir)
+-        if ( getcwd(pathtemp, _MAX_PATH) != NULL )
+-            doomwaddir = pathtemp;
+-        else
+-            doomwaddir = ".";
+-    }
++    doomwaddir = getenv("DOOMWADDIR") ? getenv("DOOMWADDIR") : "/ble/costam";
+         
+ #ifdef __MACOS__
+         // cwd is always "/" when app is dbl-clicked

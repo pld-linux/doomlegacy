@@ -6,9 +6,13 @@ Release:	5
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
+# Source0-md5:	caad0e3ee637a00520b641c9953f079e
 Source1:	http://freedoom.sourceforge.net/deutex/wads/doom2.wad.gz
+# Source1-md5:	32610843ccad90028257595c3ca1a8a5
 Source2:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
+# Source1-md5:	3d737bb577bc4295af68d54988191344
 Source3:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
+# Source1-md5:	8182e1aebac3696ddc7f9e0663740d9a
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png

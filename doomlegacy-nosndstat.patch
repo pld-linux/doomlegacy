@@ -1,0 +1,25 @@
+--- doomlegacy_src/linux_x/musserv/sequencer.c.orig	Sat Feb 22 21:25:59 2003
++++ doomlegacy_src/linux_x/musserv/sequencer.c	Sat Feb 22 21:27:23 2003
+@@ -177,11 +177,7 @@
+   seq_dev = num_fm;
+ 
+   sndstat = fopen("/dev/sndstat", "r");
+-  if (sndstat == NULL)
+-    {
+-    printf("musserver: could not open /dev/sndstat, exiting.\n");
+-    exit(1);
+-    }
++  if (sndstat != NULL) {
+   fgets(sndver, 100, sndstat);
+   for (x = 0; x < strlen(sndver); x++)
+     if (sndver[x] == '-')
+@@ -199,6 +195,9 @@
+       }
+   voxdate = atoi(snddate);
+   fclose(sndstat);
++  } else {
++   voxdate = 0; /* kernel 2.4 doesn't have sndstat */
++  }
+ 
+   voices = malloc(sinfo[seq_dev].nr_voices * sizeof(struct synth_voice));
+   for (x = 0; x < sinfo[seq_dev].nr_voices; x++)

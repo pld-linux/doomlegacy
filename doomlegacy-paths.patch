@@ -1,0 +1,86 @@
+--- doomlegacy_src/linux_x/musserv/musserver.c.orig	Sat Feb 22 20:51:24 2003
++++ doomlegacy_src/linux_x/musserv/musserver.c	Sat Feb 22 20:52:15 2003
+@@ -122,9 +122,7 @@
+     ppid = getpid();
+     if (verbose > 1) 
+ 	printf("pid %d %s\n", ppid, pproc);
+-    waddir = getenv("DOOMWADDIR");
+-    if (waddir == NULL)
+-	waddir = ".";
++    waddir = getenv("DOOMWADDIR") ? getenv("DOOMWADDIR") : "/usr/share/doomlegacy";
+ 
+     while ((x = getopt(argc, argv, "acd:fhi:lmt:u:Vv")) != -1)
+ 	switch (x)
+--- doomlegacy_src/linux_x/musserv/readwad.c.orig	Sat Feb 22 20:52:25 2003
++++ doomlegacy_src/linux_x/musserv/readwad.c	Sat Feb 22 20:53:03 2003
+@@ -213,7 +213,7 @@
+     FILE *fp;
+ 
+     if (!(waddir = getenv("DOOMWADDIR")))
+-        waddir = ".";
++	waddir = "/usr/share/doomlegacy";
+ 
+     wadfilename = malloc(2 + strlen(s) + strlen(waddir));
+     if (*s != '/')
+--- doomlegacy_src/linux_x/i_video_xshm.c.orig	Sat Feb 22 20:45:02 2003
++++ doomlegacy_src/linux_x/i_video_xshm.c	Sat Feb 22 20:46:49 2003
+@@ -1984,7 +1984,7 @@
+        rendermode = render_opengl;
+ 
+        // try to open library in CWD
+-       dlptr = dlopen("./r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
++	dlptr = dlopen("/usr/lib/doomlegacy/r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
+ 
+        if(!dlptr) {
+ 	   // try to open in LIBPATH
+--- doomlegacy_src/linux_x/i_system.c.orig	Sat Feb 22 20:48:37 2003
++++ doomlegacy_src/linux_x/i_system.c	Sat Feb 22 20:50:55 2003
+@@ -141,9 +141,9 @@
+ extern int             eventtail;
+ 
+ // Locations for searching the legacy.dat
+-#define DEFAULTWADLOCATION1 "/usr/local/games/legacy"
+-#define DEFAULTWADLOCATION2 "/usr/games/legacy"
+-#define DEFAULTSEARCHPATH1 "/usr/local"
++#define DEFAULTWADLOCATION1 "/usr/share/doomlegacy"
++#define DEFAULTWADLOCATION2 "/usr/share/games/doomlegacy"
++#define DEFAULTSEARCHPATH1 "/usr/share/games/"
+ #define DEFAULTSEARCHPATH2 "/usr/games"
+ #define WADKEYWORD "legacy.dat"
+ 
+--- doomlegacy_src/linux_x/searchp.c.orig	Sat Feb 22 20:53:41 2003
++++ doomlegacy_src/linux_x/searchp.c	Sat Feb 22 20:54:22 2003
+@@ -22,6 +22,12 @@
+ 	static char	b[2048];
+ 	struct stat	s;
+ 	char		pb[2048];
++	
++	strcpy(b,"/usr/X11R6/lib/doomlegacy_src/");
++	strcat(b,file);
++	if (stat(b, &s) == 0) {
++		return(b);
++	}
+ 
+ 	/* get PATH, if not set just return filename, might be in cwd */
+         /* added "./" for current path 19990416 by Kin */
+--- doomlegacy_src/d_main.c.orig	Sat Feb 22 20:47:20 2003
++++ doomlegacy_src/d_main.c	Sat Feb 22 20:48:10 2003
+@@ -1022,16 +1022,8 @@
+     // change to the directory where 'legacy.dat' is found
+    I_LocateWad();
+ #endif
+-    doomwaddir = getenv("DOOMWADDIR");
+-    if (!doomwaddir)
+-    {
+-        // get the current directory (possible problem on NT with "." as current dir)
+-        if ( getcwd(pathtemp, _MAX_PATH) != NULL )
+-            doomwaddir = pathtemp;
+-        else
+-            doomwaddir = ".";
+-    }
+-        
++      doomwaddir = getenv("DOOMWADDIR") ? getenv("DOOMWADDIR") : "/usr/share/doomlegacy";
++
+ #ifdef __MACOS__
+         // cwd is always "/" when app is dbl-clicked
+         if (!stricmp(doomwaddir,"/"))

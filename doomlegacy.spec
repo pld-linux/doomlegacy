@@ -97,7 +97,7 @@ mkdir bin
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy} \
-	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/Arcade}
+	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/FPP}
 
 install bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
@@ -108,8 +108,8 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
-install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
+install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
 install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
@@ -132,9 +132,9 @@ echo "from any sharware or commercial version of Doom or Heretic!"
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so
-%{_applnkdir}/Games/Arcade/*x11.desktop
+%{_applnkdir}/Games/FPP/*x11.desktop
 
 %files sdl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lsdldoom
-%{_applnkdir}/Games/Arcade/*sdl.desktop
+%{_applnkdir}/Games/FPP/*sdl.desktop

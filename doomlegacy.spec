@@ -2,7 +2,7 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.40
-Release:	5
+Release:	6
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
@@ -102,7 +102,7 @@ mkdir bin
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy} \
-	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/FPP}
+	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
 
 install bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
@@ -114,8 +114,8 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
-install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
-install %{SOURCE5} $RPM_BUILD_ROOT%{_applnkdir}/Games/FPP
+install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
@@ -141,9 +141,9 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so
-%{_applnkdir}/Games/FPP/*x11.desktop
+%{_desktopdir}/*x11.desktop
 
 %files sdl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lsdldoom
-%{_applnkdir}/Games/FPP/*sdl.desktop
+%{_desktopdir}/*sdl.desktop

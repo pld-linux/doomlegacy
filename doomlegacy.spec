@@ -88,14 +88,12 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
-gzip -9nf doomlegacy/_doc/*.txt
-
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %files common
 %defattr(644,root,root,755)
-%doc doomlegacy/_doc/*.txt.gz
+%doc doomlegacy/_doc/*.txt
 %dir %{_libdir}/doomlegacy
 %attr(755,root,root) %{_libdir}/doomlegacy/*serv*
 %{_datadir}/doomlegacy

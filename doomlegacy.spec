@@ -2,7 +2,7 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.40
-Release:	3
+Release:	4
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_140_src.tar.gz
@@ -90,7 +90,7 @@ mkdir bin
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy,%{_applnkdir}/Games}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy,%{_applnkdir}/Games/RPG}
 
 install bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
@@ -101,8 +101,8 @@ install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games
-install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/RPG
+install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/RPG
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
@@ -123,9 +123,9 @@ echo "from any sharware or commercial version of Doom or Heretic!"
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so
-%{_applnkdir}/Games/*x11.desktop
+%{_applnkdir}/Games/RPG/*x11.desktop
 
 %files sdl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lsdldoom
-%{_applnkdir}/Games/*sdl.desktop
+%{_applnkdir}/Games/RPG/*sdl.desktop

@@ -74,11 +74,16 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 %patch3 -p0
 
 %build
-install -d doomlegacy_src/linux_x/{musserv,sndserv}/{objs,bin} \
-	   bin
-%{__make} -C doomlegacy_src PGCC=1 LINUX=1 OPTFLAGS="%{rpmcflags}"
+mkdir bin
+
+# linux_x contains some precompiled binary objects (incompatible with glibc 2.3) - kill them
 %{__make} -C doomlegacy_src clean LINUX=1
-%{__make} -C doomlegacy_src PGCC=1 LINUX=1 SDL=1 OPTFLAGS="%{rpmcflags}"
+%{__make} -C doomlegacy_src \
+	PGCC=1 LINUX=1 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+
+%{__make} -C doomlegacy_src clean LINUX=1
+%{__make} -C doomlegacy_src \
+	PGCC=1 LINUX=1 SDL=1 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 
 %install
 rm -rf $RPM_BUILD_ROOT

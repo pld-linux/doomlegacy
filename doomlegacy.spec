@@ -10,6 +10,7 @@ Source1:	http://dl.sourceforge.net/doomlegacy/doom3_wad_132.zip
 Source2:	http://dl.sourceforge.net/doomlegacy/legacy_dat.zip
 Source3:	%{name}-x11.desktop
 Source4:	%{name}-sdl.desktop
+Source5:	%{name}.png
 Icon:		doomlegacy.xpm
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
@@ -91,7 +92,8 @@ mkdir bin
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy,%{_applnkdir}/Games/Arcade}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy} \
+	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/Arcade}
 
 install bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
@@ -104,6 +106,7 @@ install legacy.dat	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
 install %{SOURCE4} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade
+install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
@@ -119,6 +122,7 @@ echo "from any sharware or commercial version of Doom or Heretic!"
 %dir %{_libdir}/doomlegacy
 %attr(755,root,root) %{_libdir}/doomlegacy/*serv*
 %{_datadir}/doomlegacy
+%{_pixmapsdir}/*
 
 %files x11
 %defattr(644,root,root,755)

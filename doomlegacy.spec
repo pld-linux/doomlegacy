@@ -14,7 +14,6 @@ Source2:	http://ep09.pld-linux.org/~havner/legacy.dat
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png
-Icon:		doomlegacy.xpm
 URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch

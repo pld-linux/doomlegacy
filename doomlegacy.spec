@@ -2,7 +2,7 @@ Summary:	DOOM Legacy for Linux
 Summary(pl):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.42
-Release:	1
+Release:	2
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_142_src.tar.gz
@@ -14,7 +14,6 @@ Source2:	http://ep09.pld-linux.org/~havner/legacy.dat
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png
-URL:		http://legacy.newdoom.com/
 Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
 Patch2:		%{name}-nosndstat.patch
@@ -22,11 +21,13 @@ Patch3:		%{name}-sound.patch
 Patch4:		%{name}-errno.patch
 Patch5:		%{name}-nocmap.patch
 Patch6:		%{name}-vidmodes.patch
-BuildRequires:	OpenGL-devel
+Patch7:		%{name}-c.patch
+URL:		http://legacy.newdoom.com/
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	SDL_mixer-devel
-BuildRequires:	XFree86-devel
 BuildRequires:	nasm
 BuildRequires:	unzip
+BuildRequires:	xorg-lib-libXext-devel
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,8 +55,7 @@ Pliki wspólne dla obu wersji DOOM Legacy.
 Summary:	DOOM Legacy for Linux - X Window and OpenGL version
 Summary(pl):	DOOM Legacy dla Linuksa - wersja korzystaj±ca z X Window i OpenGL
 Group:		X11/Applications/Games
-Requires:	OpenGL
-Obsoletes:	%{name}-x11
+Obsoletes:	doomlegacy-x11
 
 %description X11
 This is DOOM Legacy for Linux - X11 and OpenGL version.
@@ -68,7 +68,6 @@ OpenGL.
 Summary:	DOOM Legacy for Linux - SDL version
 Summary(pl):	DOOM Legacy dla Linuksa - wersja korzystaj±ca z SDL
 Group:		X11/Applications/Games
-Requires:	OpenGL
 
 %description sdl
 This is DOOM Legacy for Linux - SDL version.
@@ -79,24 +78,34 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 %prep
 %setup -q -c -a1
 %patch0 -p0
-%patch1 -p0
+%patch1 -p1
 %patch2 -p0
 %patch3 -p0
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 mkdir bin
 
 # linux_x contains some precompiled binary objects (incompatible with glibc 2.3) - kill them
-%{__make} -C doomlegacy_142_src clean LINUX=1
+%{__make} -C doomlegacy_142_src clean \
+	LINUX=1
 %{__make} -C doomlegacy_142_src \
-	PGCC=1 LINUX=1 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+	PGCC=1 \
+	LINUX=1 \
+	CC="%{__cc}" \
+	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 
-%{__make} -C doomlegacy_142_src clean LINUX=1
+%{__make} -C doomlegacy_142_src clean \
+	LINUX=1
 %{__make} -C doomlegacy_142_src \
-	PGCC=1 LINUX=1 SDL=1 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+	PGCC=1 \
+	LINUX=1 \
+	SDL=1 \
+	CC="%{__cc}" \
+	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -108,7 +117,6 @@ install bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
 install doomlegacy_142_src/linux_x/sndserv/linux/llsndserv $RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install doomlegacy_142_src/linux_x/musserv/linux/musserver $RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
-
 
 install doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
 install %{SOURCE2}	$RPM_BUILD_ROOT%{_datadir}/doomlegacy

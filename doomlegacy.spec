@@ -1,5 +1,5 @@
 Summary:	DOOM Legacy for Linux
-Summary(pl.UTF-8):   DOOM Legacy dla Linuksa
+Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.42
 Release:	2
@@ -42,7 +42,7 @@ DOOM Legacy dla Linuksa.
 
 %package common
 Summary:	DOOM Legacy for Linux - common files
-Summary(pl.UTF-8):   DOOM Legacy dla Linuksa - pliki wspólne
+Summary(pl.UTF-8):	DOOM Legacy dla Linuksa - pliki wspólne
 Group:		X11/Applications/Games
 
 %description common
@@ -53,7 +53,7 @@ Pliki wspólne dla obu wersji DOOM Legacy.
 
 %package X11
 Summary:	DOOM Legacy for Linux - X Window and OpenGL version
-Summary(pl.UTF-8):   DOOM Legacy dla Linuksa - wersja korzystająca z X Window i OpenGL
+Summary(pl.UTF-8):	DOOM Legacy dla Linuksa - wersja korzystająca z X Window i OpenGL
 Group:		X11/Applications/Games
 Obsoletes:	doomlegacy-x11
 
@@ -66,7 +66,7 @@ OpenGL.
 
 %package sdl
 Summary:	DOOM Legacy for Linux - SDL version
-Summary(pl.UTF-8):   DOOM Legacy dla Linuksa - wersja korzystająca z SDL
+Summary(pl.UTF-8):	DOOM Legacy dla Linuksa - wersja korzystająca z SDL
 Group:		X11/Applications/Games
 
 %description sdl

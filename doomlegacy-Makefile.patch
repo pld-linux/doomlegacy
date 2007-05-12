@@ -1,5 +1,5 @@
---- doomlegacy_142_src/linux_x/musserv/Makefile.linux.orig	Sat Feb 22 21:12:31 2003
-+++ doomlegacy_142_src/linux_x/musserv/Makefile.linux	Sat Feb 22 21:12:52 2003
+--- doomlegacy-1.42/doomlegacy_142_src/linux_x/musserv/Makefile.linux.orig	Sat Feb 22 21:12:31 2003
++++ doomlegacy-1.42/doomlegacy_142_src/linux_x/musserv/Makefile.linux	Sat Feb 22 21:12:52 2003
 @@ -3,7 +3,7 @@
  #
  
@@ -9,8 +9,8 @@
  LDFLAGS	=
  #LDFLAGS	= -static
  
---- doomlegacy_142_src/linux_x/sndserv/Makefile.orig	Sat Feb 22 21:11:50 2003
-+++ doomlegacy_142_src/linux_x/sndserv/Makefile	Sat Feb 22 21:12:12 2003
+--- doomlegacy-1.42/doomlegacy_142_src/linux_x/sndserv/Makefile.orig	Sat Feb 22 21:11:50 2003
++++ doomlegacy-1.42/doomlegacy_142_src/linux_x/sndserv/Makefile	Sat Feb 22 21:12:12 2003
 @@ -22,7 +22,7 @@
  #
  
@@ -20,8 +20,8 @@
  ifdef FREEBSD
  CFLAGS:=${CFLAGS} -DFREEBSD
  endif
---- doomlegacy_142_src/tools/makefile.orig	Sat Feb 22 21:13:11 2003
-+++ doomlegacy_142_src/tools/makefile	Sat Feb 22 21:14:30 2003
+--- doomlegacy-1.42/doomlegacy_142_src/tools/makefile.orig	Sat Feb 22 21:13:11 2003
++++ doomlegacy-1.42/doomlegacy_142_src/tools/makefile	Sat Feb 22 21:14:30 2003
 @@ -1,24 +1,24 @@
  
  default:    dircomp2.c

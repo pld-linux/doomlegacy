@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=SDLdoom
 Comment=Doom - SDL version
 Comment[pl]=Doom - wersja SDL
 Exec=lsdldoom
-Icon=doomlegacy.png
+Icon=doomlegacy
 Terminal=false
 Type=Application
 Categories=Game;ActionGame;

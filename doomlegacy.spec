@@ -6,7 +6,7 @@ Release:	2
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/doomlegacy/legacy_142_src.tar.gz
-# Source0-md5:	e1cc5039872dc70e506cd427a9015080
+# Source0-md5:	62f5cdad464463038d568a53b13c22f7
 Source1:	http://downloads.sourceforge.net/doomlegacy/doom3_wad_132.zip
 # Source1-md5:	3d737bb577bc4295af68d54988191344
 Source2:	http://ep09.pld-linux.org/~havner/legacy.dat

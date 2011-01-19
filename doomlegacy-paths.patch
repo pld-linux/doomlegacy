@@ -18,7 +18,7 @@
  
      if (!(waddir = getenv("DOOMWADDIR")))
 -        waddir = ".";
-+	waddir = "/usr/share/doomlegacy";
++        waddir = "/usr/share/doomlegacy";
  
      wadfilename = malloc(2 + strlen(s) + strlen(waddir));
      if (*s != '/')
@@ -29,7 +29,7 @@
  
         // try to open library in CWD
 -       dlptr = dlopen("./r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
-+	dlptr = dlopen("/usr/lib/doomlegacy/r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
++       dlptr = dlopen("/usr/lib/doomlegacy/r_opengl.so",RTLD_NOW | RTLD_GLOBAL);
  
         if(!dlptr) {
  	   // try to open in LIBPATH
@@ -55,7 +55,7 @@
  	struct stat	s;
  	char		pb[2048];
 +	
-+	strcpy(b,"/usr/X11R6/lib/doomlegacy_142_src/");
++	strcpy(b,"/usr/lib/doomlegacy/");
 +	strcat(b,file);
 +	if (stat(b, &s) == 0) {
 +		return(b);

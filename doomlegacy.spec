@@ -1,16 +1,23 @@
+# TODO: 64bit version (review our patches too!)
+#
+# Conditional build:
+%bcond_with		x11	# build with System Media Interface (broken, seems unsupported)
+%bcond_without	sdl	# build with SDL System Media Interface
+
 Summary:	DOOM Legacy for Linux
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
-Version:	1.42
-Release:	2
+Version:	1.44
+Release:	0.alpha1.5
 License:	GPL, perhaps except for doom3.wad
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/doomlegacy/legacy_142_src.tar.gz
-# Source0-md5:	62f5cdad464463038d568a53b13c22f7
+Source0:	http://doomlegacy.sourceforge.net/releases/%{name}_144_alpha1_src_r752.zip
+# Source0-md5:	e1cc5039872dc70e506cd427a9015080
 Source1:	http://downloads.sourceforge.net/doomlegacy/doom3_wad_132.zip
 # Source1-md5:	3d737bb577bc4295af68d54988191344
-Source2:	http://ep09.pld-linux.org/~havner/legacy.dat
-# Source2-md5:	df5cac5c3d37849ceb432cbff4df2415
+# legacy wad extracted from binary archive: doomlegacy_144_alpha1_linux2.4_32bit.zip
+Source2:	http://carme.pld-linux.org/~glen/legacy.wad
+# Source2-md5:	2c29a4d7cedcf95d09dec71c41025aa5
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png
@@ -18,13 +25,13 @@ Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
 Patch2:		%{name}-nosndstat.patch
 Patch3:		%{name}-sound.patch
-Patch4:		%{name}-errno.patch
 Patch5:		%{name}-nocmap.patch
 Patch6:		%{name}-vidmodes.patch
-Patch7:		%{name}-c.patch
+Patch7:		i_sound-pow.patch
+Patch8:		keytable.patch
 URL:		http://doomlegacy.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	SDL_mixer-devel
+%{?with_sdl:BuildRequires:	SDL_mixer-devel}
 BuildRequires:	nasm
 BuildRequires:	rpmbuild(macros) >= 1.595
 BuildRequires:	unzip
@@ -32,7 +39,7 @@ BuildRequires:	xorg-lib-libXext-devel
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		debugcflags	-O1 -g
+%define		debugcflags		-O1 -g
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
@@ -56,6 +63,7 @@ Pliki wspólne dla obu wersji DOOM Legacy.
 Summary:	DOOM Legacy for Linux - X Window and OpenGL version
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa - wersja korzystająca z X Window i OpenGL
 Group:		X11/Applications/Games
+Requires:	%{name}-common = %{version}-%{release}
 Obsoletes:	doomlegacy-x11
 
 %description X11
@@ -69,6 +77,7 @@ OpenGL.
 Summary:	DOOM Legacy for Linux - SDL version
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa - wersja korzystająca z SDL
 Group:		X11/Applications/Games
+Requires:	%{name}-common = %{version}-%{release}
 
 %description sdl
 This is DOOM Legacy for Linux - SDL version.
@@ -78,24 +87,20 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
 %setup -qc -a1
-mv doomlegacy_142_src src
+mv trunk src
 cd src
 %patch0 -p1
 %patch1 -p2
 %patch2 -p1
 %patch3 -p1
-%patch4 -p2
 %patch5 -p2
 %patch6 -p2
 %patch7 -p2
+%patch8 -p2
 
 %build
-install -d objs bin
+install -d objs bin src/linux_x/{mus,snd}serv/linux
 cd src
-
-# linux_x contains some precompiled binary objects (incompatible with glibc 2.3) - kill them
-%{__make} clean \
-	LINUX=1
 
 # build musserv/sndserv first. with our flags
 %{__make} -C linux_x/musserv -f Makefile.linux \
@@ -110,40 +115,43 @@ install -p linux_x/musserv/linux/musserver ../bin
 	LDFLAGS="%{rpmldflags}"
 install -p linux_x/sndserv/linux/llsndserv ../bin
 
-# build llxdoom
-%{__make} \
-	PGCC=1 \
-	LINUX=1 \
+%if %{with sdl}
+%{__make} -j1 \
+	SMIF=SDL \
 	CC="%{__cc}" \
+	LDFLAGS="%{rpmldflags}"
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+%endif
 
-%{__make} clean \
-	LINUX=1
-
-# build lsdldoom
+%if %{with x11}
+%{__make} clean
 %{__make} \
-	PGCC=1 \
-	LINUX=1 \
-	SDL=1 \
+	SMIF=LINUX_X11 \
 	CC="%{__cc}" \
+	LDFLAGS="%{rpmldflags}"
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/doomlegacy,%{_datadir}/doomlegacy} \
 	$RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
 
-install -p bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
-install -p bin/lsdldoom	$RPM_BUILD_ROOT%{_bindir}
 install -p bin/llsndserv $RPM_BUILD_ROOT%{_libdir}/doomlegacy
 install -p bin/musserver $RPM_BUILD_ROOT%{_libdir}/doomlegacy
+
+%if %{with x11}
+install -p bin/llxdoom	$RPM_BUILD_ROOT%{_bindir}
 install -p bin/r_opengl.so	$RPM_BUILD_ROOT%{_libdir}/doomlegacy
+cp -p %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}
+%endif
+%if %{with sdl}
+install -p bin/doomlegacy $RPM_BUILD_ROOT%{_bindir}
+cp -p %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
+%endif
 
 cp -p doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
-cp -p %{SOURCE2}	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
-
-cp -p %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}
-cp -p %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/doomlegacy/legacy.wad
 cp -p %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
@@ -163,15 +171,19 @@ EOF
 %dir %{_libdir}/doomlegacy
 %attr(755,root,root) %{_libdir}/doomlegacy/*serv*
 %{_datadir}/doomlegacy
-%{_pixmapsdir}/*
+%{_pixmapsdir}/*.png
 
+%if %{with x11}
 %files X11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/llxdoom
 %attr(755,root,root) %{_libdir}/doomlegacy/r_opengl.so
 %{_desktopdir}/*x11.desktop
+%endif
 
+%if %{with sdl}
 %files sdl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/lsdldoom
+%attr(755,root,root) %{_bindir}/doomlegacy
 %{_desktopdir}/*sdl.desktop
+%endif

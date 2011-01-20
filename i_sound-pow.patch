@@ -1,0 +1,13 @@
+i_sound.c needs -lm for pow()
+
+--- doomlegacy-1.44/src/Makefile~	2011-01-20 03:20:12.000000000 +0200
++++ doomlegacy-1.44/src/Makefile	2011-01-20 03:21:30.240842662 +0200
+@@ -115,7 +115,7 @@
+   else
+     # default is Linux
+     OPTS := -DLINUX
+-    LIBS := -lGL -lGLU
++    LIBS := -lGL -lGLU -lm
+   endif
+ 
+   OPTS += -DHWRENDER -DSDL $(shell sdl-config --cflags) -I.

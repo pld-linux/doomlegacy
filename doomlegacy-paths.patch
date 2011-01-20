@@ -63,22 +63,18 @@
  
  	/* get PATH, if not set just return filename, might be in cwd */
          /* added "./" for current path 19990416 by Kin */
---- doomlegacy_142_src/d_main.c.orig	Sat Feb 22 20:47:20 2003
-+++ doomlegacy_142_src/d_main.c	Sat Feb 22 20:48:10 2003
-@@ -1022,16 +1022,8 @@
-     // change to the directory where 'legacy.dat' is found
-     I_LocateWad();
- #endif
--    doomwaddir = getenv("DOOMWADDIR");
--    if (!doomwaddir)
--    {
+--- doomlegacy-1.44/d_main.c~	2010-09-20 23:00:51.000000000 +0300
++++ doomlegacy-1.44/d_main.c	2011-01-20 02:38:22.202123940 +0200
+@@ -1264,11 +1264,7 @@
+     char *doomwaddir = getenv("DOOMWADDIR");
+     if (!doomwaddir)
+     {
 -        // get the current directory (possible problem on NT with "." as current dir)
 -        if (getcwd(pathtemp, _MAX_PATH) != NULL)
 -            doomwaddir = pathtemp;
 -        else
 -            doomwaddir = ".";
--    }
-+    doomwaddir = getenv("DOOMWADDIR") ? getenv("DOOMWADDIR") : "/usr/share/doomlegacy";
- 
- #ifdef __MACOS__
-     // cwd is always "/" when app is dbl-clicked
++        doomwaddir = "/usr/share/doomlegacy";
+     }
+ #if 0
+ //[WDJ] disabled in 143beta_macosx

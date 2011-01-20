@@ -9,15 +9,13 @@ Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.44
 Release:	0.alpha1.5
-License:	GPL, perhaps except for doom3.wad
+License:	GPL, perhaps except for legacy.wad
 Group:		Applications/Games
 Source0:	http://doomlegacy.sourceforge.net/releases/%{name}_144_alpha1_src_r752.zip
 # Source0-md5:	e1cc5039872dc70e506cd427a9015080
-Source1:	http://downloads.sourceforge.net/doomlegacy/doom3_wad_132.zip
-# Source1-md5:	3d737bb577bc4295af68d54988191344
 # legacy wad extracted from binary archive: doomlegacy_144_alpha1_linux2.4_32bit.zip
-Source2:	http://carme.pld-linux.org/~glen/legacy.wad
-# Source2-md5:	2c29a4d7cedcf95d09dec71c41025aa5
+Source1:	http://carme.pld-linux.org/~glen/legacy.wad
+# Source1-md5:	2c29a4d7cedcf95d09dec71c41025aa5
 Source4:	%{name}-x11.desktop
 Source5:	%{name}-sdl.desktop
 Source6:	%{name}.png
@@ -150,8 +148,7 @@ install -p bin/doomlegacy $RPM_BUILD_ROOT%{_bindir}
 cp -p %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 %endif
 
-cp -p doom3.wad	$RPM_BUILD_ROOT%{_datadir}/doomlegacy
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/doomlegacy/legacy.wad
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/doomlegacy/legacy.wad
 cp -p %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean

@@ -54,9 +54,19 @@
 -	gcc -O6 -mpentium -Wall -s convert.c -o convert.exe
 +	$(CC) $(OPTFLAGS) -Wall convert.c -o convert.exe
  	
---- doomlegacy-1.44/src/Makefile~	2010-09-20 23:40:35.000000000 +0300
-+++ doomlegacy-1.44/src/Makefile	2011-01-20 02:59:37.549960763 +0200
-@@ -78,6 +78,7 @@
+--- doomlegacy-1.44/src/Makefile	2011-01-20 12:36:18.696704389 +0200
++++ doomlegacy-1.44/src/Makefile	2011-01-20 12:39:25.345251712 +0200
+@@ -57,6 +57,9 @@
+ OPTLEV = -O3
+ #OPTLEV = -O5
+ 
++# OPTFLAGS together, not just opt level
++OPTFLAGS = $(OPTLEV)
++
+ # Debug enables, save on reinventing this everytime.
+ #DEBUG=1
+ #PROFILEMODE=1
+@@ -78,6 +81,7 @@
  
  # gcc or g++
  CC=gcc
@@ -64,7 +74,7 @@
  
  # End of User tunable settings
  
-@@ -147,8 +148,7 @@
+@@ -147,8 +151,7 @@
    X=1
  
    ifdef X
@@ -74,7 +84,7 @@
      LIBS=-lXext -lX11 -lm -ldl -lXxf86vm
  
      #WITH_DGA=1
-@@ -202,8 +202,7 @@
+@@ -202,8 +205,7 @@
    endif
  
    ifdef X
@@ -84,7 +94,7 @@
      LIBS=-lXext -lX11 -lm -lXxf86vm -lipx -lkvm -pthread
      # name of the exefile
      EXENAME=llxdoom
-@@ -213,7 +212,7 @@
+@@ -213,7 +215,7 @@
        $(O)/hw_md2.o $(O)/hw_cache.o $(O)/hw_trick.o
  
    else #ifdef X
@@ -93,7 +103,7 @@
      LDFLAGS=
      LIBS=-lggi -lm -lipx
      # name of the exefile
-@@ -294,7 +293,7 @@
+@@ -294,7 +296,7 @@
  
  ifdef PROFILEMODE
  # build with gprof profiling information
@@ -102,16 +112,16 @@
  else
  ifdef DEBUG
  # No -fomit-frame-pointer because debugging on some machines depends upon it.
-@@ -303,7 +302,7 @@
+@@ -303,7 +305,7 @@
  else
  # build a normal optimized version
    #CFLAGS += -O3
 -  CFLAGS += $(OPTLEV) -fomit-frame-pointer
-+  CFLAGS += $(OPTLEV)
++  CFLAGS += $(OPTFLAGS)
  endif
  endif
  
-@@ -464,13 +463,13 @@
+@@ -464,13 +466,13 @@
  
  
  $(BIN)/wadtool: $(O)/wadtool.o $(O)/md5_cpp.o
@@ -128,7 +138,7 @@
  
  wad	: $(BIN)/wadtool
  ifdef WAD
-@@ -507,7 +506,7 @@
+@@ -507,7 +509,7 @@
  
  #dll
  dll : $(O)/r_opengl.o $(O)/ogl_x11.o
@@ -137,7 +147,7 @@
  
  musserv:
  	@mkdir -p $(MUSSERV)/linux
-@@ -533,7 +532,7 @@
+@@ -533,7 +535,7 @@
  
  
  $(O)/ogl_x11.o:  hardware/r_opengl/ogl_x11.c hardware/r_opengl/r_opengl.h

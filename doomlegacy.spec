@@ -4,11 +4,12 @@
 %bcond_with		x11	# build with System Media Interface (broken, seems unsupported)
 %bcond_without	sdl	# build with SDL System Media Interface
 
+%define		rel	6
 Summary:	DOOM Legacy for Linux
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.44
-Release:	0.alpha1.5
+Release:	0.alpha1.%{rel}
 License:	GPL, perhaps except for legacy.wad
 Group:		Applications/Games
 Source0:	http://doomlegacy.sourceforge.net/releases/%{name}_144_alpha1_src_r752.zip
@@ -84,7 +85,7 @@ This is DOOM Legacy for Linux - SDL version.
 To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
-%setup -qc -a1
+%setup -qc
 mv trunk src
 cd src
 %patch0 -p1
@@ -117,7 +118,7 @@ install -p linux_x/sndserv/linux/llsndserv ../bin
 %{__make} -j1 \
 	SMIF=SDL \
 	CC="%{__cc}" \
-	LDFLAGS="%{rpmldflags}"
+	LDFLAGS="%{rpmldflags}" \
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 %endif
 
@@ -126,7 +127,7 @@ install -p linux_x/sndserv/linux/llsndserv ../bin
 %{__make} \
 	SMIF=LINUX_X11 \
 	CC="%{__cc}" \
-	LDFLAGS="%{rpmldflags}"
+	LDFLAGS="%{rpmldflags}" \
 	OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 %endif
 

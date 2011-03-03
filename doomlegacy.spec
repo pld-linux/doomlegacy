@@ -1,4 +1,6 @@
-# TODO: 64bit version (review our patches too!)
+# TODO
+# - 64bit version
+# - (some) patches tracker: https://sourceforge.net/tracker/?func=detail&aid=3198347&group_id=2479&atid=102479
 #
 # Conditional build:
 %bcond_with		x11	# build with System Media Interface (broken, seems unsupported)

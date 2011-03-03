@@ -4,17 +4,21 @@
 %bcond_with		x11	# build with System Media Interface (broken, seems unsupported)
 %bcond_without	sdl	# build with SDL System Media Interface
 
-%define		rel	6
+%define		rel	1
 Summary:	DOOM Legacy for Linux
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.44
-Release:	0.alpha1.%{rel}
+Release:	0.alpha2.%{rel}
 License:	GPL, perhaps except for legacy.wad
 Group:		Applications/Games
-Source0:	http://doomlegacy.sourceforge.net/releases/%{name}_144_alpha1_src_r752.zip
-# Source0-md5:	e1cc5039872dc70e506cd427a9015080
-# legacy wad extracted from binary archive: doomlegacy_144_alpha1_linux2.4_32bit.zip
+#Source0:	http://doomlegacy.sourceforge.net/releases/%{name}_144_alpha2_src_r777.zip
+# no upstream source, so create our own
+# svn export https://doomlegacy.svn.sourceforge.net/svnroot/doomlegacy/legacy_one/trunk@778 doomlegacy_144_alpha2
+# zip -r doomlegacy_144_alpha2_src_r778.zip doomlegacy_144_alpha2
+Source0:	%{name}_144_alpha2_src_r778.zip
+# Source0-md5:	ab732fe33f1e2dcb8f79f6025544895a
+# legacy wad extracted from binary archive: doomlegacy_144_alpha2_linux2.4_32bit.zip
 Source1:	http://carme.pld-linux.org/~glen/legacy.wad
 # Source1-md5:	2c29a4d7cedcf95d09dec71c41025aa5
 Source4:	%{name}-x11.desktop
@@ -86,7 +90,7 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 
 %prep
 %setup -qc
-mv trunk src
+mv doomlegacy_144_alpha2 src
 cd src
 %patch0 -p1
 %patch1 -p2

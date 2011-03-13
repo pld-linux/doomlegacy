@@ -1,0 +1,67 @@
+--- doomlegacy-1.44/src/Makefile	2011-03-13 23:16:45.655640054 +0200
++++ doomlegacy-1.44/src/Makefile	2011-03-13 23:14:40.039898572 +0200
+@@ -41,11 +41,6 @@
+ # SDL Mixer, to get music
+ HAVE_MIXER=1
+ 
+-# Developers with svn can enable this to have svn number in executable.
+-# Causes compile error message otherwise.
+-# Until can find test for presence of svn, this is best that can be done.
+-#SVN_ENABLE=1
+-
+ # Subdirectories for objects and binaries
+ O=../objs
+ BIN=../bin
+@@ -92,7 +87,6 @@
+ NASMFORMAT=elf -DLINUX
+ i_cdmus_o=$(O)/i_cdmus.o
+ 
+-
+ # default system media interface
+ ifndef SMIF
+   SMIF = SDL
+@@ -331,6 +325,7 @@
+ OBJS :=  $(OBJS) \
+ 		$(O)/dstrings.o  \
+ 		$(i_cdmus_o)	 \
++		$(O)/i_main.o	 \
+ 		$(O)/i_net.o	 \
+ 		$(O)/i_tcp.o	 \
+ 		$(O)/i_system.o  \
+@@ -462,15 +457,13 @@
+ $(O):
+ 	@mkdir $(O)
+ 
+-.PHONY : versionstring
+-# This may fail because, (a) svn not installed, (b) not a svn directory.
+-# This compiles d_main a second time, with SVN_REV set.
+-versionstring:
+-ifdef SVN_ENABLE
+-	$(CC) -c $(CFLAGS) -DSVN_REV=\"`svn info | grep Revision | sed -e 's/Revision: //'`\" d_main.c -o $(O)/d_main.o
+-endif
+-
++# this prints "exported" if is outside svn dir, and "none" if svn not installed
++# release tarball should include svnrev.txt or not use the define in code.
++svnrev.txt:
++	(svnversion 2>/dev/null || echo none) > $@
+ 
++$(O)/d_main.o: d_main.c svnrev.txt
++	$(CC) $(CFLAGS) -DSVN_REV=\"`cat svnrev.txt`\" -c $< -o $@
+ 
+ $(BIN)/wadtool: $(O)/wadtool.o $(O)/md5_cpp.o
+ 	$(CXX) $(LDFLAGS) $^ -o $@
+@@ -503,12 +496,11 @@
+ asm: $(BIN)/$(EXENAME)
+ 	objdump -d $(BIN)/$(EXENAME) --no-show-raw-insn > $(BIN)/doomlegacy.s
+ 
+-
+ # executable
+-$(BIN)/$(EXENAME): $(O) $(OBJS) $(O)/i_main.o versionstring
++$(BIN)/$(EXENAME): $(O) $(OBJS)
+ #	 @mkdir $(BIN)
+ 	@echo Linking...
+-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
++	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) \
+ 	-o $(BIN)/$(EXENAME) $(LIBS)
+ 
+ 

@@ -1,25 +1,24 @@
-# TODO
-# - 64bit version
-# - (some) patches tracker: https://sourceforge.net/tracker/?func=detail&aid=3198347&group_id=2479&atid=102479
 #
 # Conditional build:
 %bcond_with		x11	# build with System Media Interface (broken, seems unsupported)
 %bcond_without	sdl	# build with SDL System Media Interface
 
-%define		rel	1
+%define		rel	2
+%define		svnrev	817
 Summary:	DOOM Legacy for Linux
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
 Name:		doomlegacy
 Version:	1.44
-Release:	0.alpha2.%{rel}
+Release:	0.alpha2.r%{svnrev}.%{rel}
 License:	GPL, perhaps except for legacy.wad
 Group:		Applications/Games
 #Source0:	http://doomlegacy.sourceforge.net/releases/%{name}_144_alpha2_src_r777.zip
 # no upstream source, so create our own
-# svn export https://doomlegacy.svn.sourceforge.net/svnroot/doomlegacy/legacy_one/trunk@778 doomlegacy_144_alpha2
-# zip -r doomlegacy_144_alpha2_src_r778.zip doomlegacy_144_alpha2
-Source0:	%{name}_144_alpha2_src_r778.zip
-# Source0-md5:	ab732fe33f1e2dcb8f79f6025544895a
+# svn co https://doomlegacy.svn.sourceforge.net/svnroot/doomlegacy/legacy_one/trunk legacy_one
+# rm -rf doomlegacy_144_alpha2 && svn export legacy_one doomlegacy_144_alpha2
+# zip -r doomlegacy_144_alpha2_src_r$(svnversion legacy_one).zip doomlegacy_144_alpha2
+Source0:	%{name}_144_alpha2_src_r817.zip
+# Source0-md5:	28b564983eec5106f6cc3b39bd793dca
 # legacy wad extracted from binary archive: doomlegacy_144_alpha2_linux2.4_32bit.zip
 Source1:	http://carme.pld-linux.org/~glen/legacy.wad
 # Source1-md5:	2c29a4d7cedcf95d09dec71c41025aa5
@@ -30,10 +29,7 @@ Patch0:		%{name}-paths.patch
 Patch1:		%{name}-Makefile.patch
 Patch2:		%{name}-nosndstat.patch
 Patch3:		%{name}-sound.patch
-Patch5:		%{name}-nocmap.patch
-Patch6:		%{name}-vidmodes.patch
-Patch7:		i_sound-pow.patch
-Patch8:		keytable.patch
+Patch4:		svnversion.patch
 URL:		http://doomlegacy.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
 %{?with_sdl:BuildRequires:	SDL_mixer-devel}
@@ -41,7 +37,7 @@ BuildRequires:	nasm
 BuildRequires:	rpmbuild(macros) >= 1.595
 BuildRequires:	unzip
 BuildRequires:	xorg-lib-libXext-devel
-ExclusiveArch:	%{ix86}
+ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		debugcflags		-O1 -g
@@ -98,10 +94,6 @@ cd src
 %patch1 -p2
 %patch2 -p1
 %patch3 -p1
-%patch5 -p2
-%patch6 -p2
-%patch7 -p2
-%patch8 -p2
 
 %build
 install -d objs bin src/linux_x/{mus,snd}serv/linux

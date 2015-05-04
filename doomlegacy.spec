@@ -3,7 +3,7 @@
 %bcond_with		x11	# build with System Media Interface (broken, seems unsupported)
 %bcond_without	sdl	# build with SDL System Media Interface
 
-%define		rel	2
+%define		rel	3
 %define		svnrev	817
 Summary:	DOOM Legacy for Linux
 Summary(pl.UTF-8):	DOOM Legacy dla Linuksa
@@ -37,7 +37,7 @@ BuildRequires:	nasm
 BuildRequires:	rpmbuild(macros) >= 1.595
 BuildRequires:	unzip
 BuildRequires:	xorg-lib-libXext-devel
-ExclusiveArch:	%{ix86} %{x8664}
+ExclusiveArch:	%{ix86} %{x8664} x32
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		debugcflags		-O1 -g

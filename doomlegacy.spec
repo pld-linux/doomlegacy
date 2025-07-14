@@ -90,12 +90,12 @@ To jest DOOM Legacy dla Linuksa - wersja SDL.
 %setup -qc
 mv doomlegacy_144_alpha2 src
 cd src
-%patch0 -p1
-%patch1 -p2
-%patch2 -p1
-%patch3 -p1
+%patch -P0 -p1
+%patch -P1 -p2
+%patch -P2 -p1
+%patch -P3 -p1
 cd -
-%patch4 -p1
+%patch -P4 -p1
 echo %{svnrev} > src/svnrev.txt
 
 %build
